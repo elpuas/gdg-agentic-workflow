@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,5 +14,8 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
