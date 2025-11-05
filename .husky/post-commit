@@ -1,4 +1,25 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+set -eu
 
-node src/agent.js
+# ensure we run from the repo root so relative paths work
+cd -- "$(dirname "$0")/.."
+
+# load Node.js when using nvm or asdf in interactive shells
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+	# shellcheck disable=SC1090
+	. "$HOME/.nvm/nvm.sh"
+elif [ -s "$HOME/.asdf/asdf.sh" ]; then
+	# shellcheck disable=SC1091
+	. "$HOME/.asdf/asdf.sh"
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+	echo "husky post-commit: node not found in PATH" >&2
+	exit 127
+fi
+
+node src/agent.js || {
+	code=$?
+	echo "post-commit agent failed ($code)" >&2
+	exit "$code"
+}
