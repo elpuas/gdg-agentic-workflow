@@ -14,6 +14,7 @@ It’s intended to serve as a personal portfolio to showcase basic information, 
 ## AI agent objective
 
 This agent should:
+
 1. Read this context when triggered.
 2. Suggest a commit message based on the files that were changed.
 3. Identify possible improvements such as:
